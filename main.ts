@@ -1,5 +1,6 @@
 import { chmodSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
+// callhearsal = call + rehearsal: the private rehearsal of a phone call.
 const ENTRY =
   "callhearsal: the silent rehearsal of a phone call, both sides included, before you dial.";
 const OUT_DIR = "/output";
@@ -7,6 +8,9 @@ const OUT_FILE = "/output/entry.txt";
 
 if (ENTRY.length < 1 || ENTRY.length > 140) {
   throw new Error(`entry must be 1-140 characters, got ${ENTRY.length}`);
+}
+if (ENTRY.includes("\n") || ENTRY.includes("\r")) {
+  throw new Error("entry must be a single line (no newline characters)");
 }
 if (ENTRY.trim().length === 0) {
   throw new Error("entry must not be only whitespace");
